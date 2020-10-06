@@ -9,6 +9,39 @@ object Week1 {
       case "--store"     => args.tail.zip(args.tail.map(n => fibStr(n.toIntOption.getOrElse(sys.error(s"non int literal ${n} found"))))).mkString("\n") 
       case "--formula"   => args.tail.zip(args.tail.map(n => fibFor(n.toIntOption.getOrElse(sys.error(s"non int literal ${n} found"))))).mkString("\n") 
       case "--matrix"    => args.tail.zip(args.tail.map(n => fibMat(n.toIntOption.getOrElse(sys.error(s"non int literal ${n} found"))))).mkString("\n") 
+      case "--compare"   => {
+        import java.lang.System.currentTimeMillis
+        assert(args.tail.length > 0, "number of runs not found")
+        (0 to args(1).toIntOption.getOrElse(sys.error(s"non int literal ${args(1)} found"))).map(x => {
+          Array(
+            ("Recursion", {
+              val start = currentTimeMillis
+              fibRec(x)
+              currentTimeMillis - start
+            }),
+            ("Array", {
+              val start = currentTimeMillis
+              fibArr(x)
+              currentTimeMillis - start
+            }),
+            ("Store", {
+              val start = currentTimeMillis
+              fibStr(x)
+              currentTimeMillis - start
+            }),
+            ("Formula", {
+              val start = currentTimeMillis
+              fibFor(x)
+              currentTimeMillis - start
+            }),
+            ("Matrix", {
+              val start = currentTimeMillis
+              fibMat(x)
+              currentTimeMillis - start
+            })
+          ).mkString(",")
+        }).tail.mkString("\n")
+      }
       case x => sys.error(s"Expected an argument. Got ${x}")
     } 
   }

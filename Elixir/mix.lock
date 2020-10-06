@@ -1,0 +1,3 @@
+%{
+  "gnuplot": {:hex, :gnuplot, "1.19.104", "a88996db3859e334a2177aaaa3a4e489890aac4091e79f73febad3e516cd22f7", [:mix], [], "hexpm", "6d20bb702c2f79e495716a2e48e65c6011ef4ef20986a9240f28c2cf59f44329"},
+}
