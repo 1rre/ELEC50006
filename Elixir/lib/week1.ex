@@ -23,15 +23,36 @@ defmodule Week1 do
         end)
       "--compare" ->
         if Enum.count(args) > 1 do
-          (0..(Integer.parse(Enum.at(args, 1)) |> elem(0))) |> Enum.map(fn x ->
-            "#{x}: #{[
-              #time(x, fn y -> fib_recursive(y) end),
-              time(x, fn y -> fib_array(y) end),
-              time(x, fn y -> fib_store(y) end),
-              #time(x, fn y -> fib_formula(y) end),
-              time(x, fn y -> fib_matrix(y) end)
-            ] |> Enum.join(",")}"
-          end) |> Enum.join("\n") |> IO.puts()
+          range = (0..(Integer.parse(Enum.at(args, 1)) |> elem(0)))
+          Plot.draw(
+            {"Time for each method", "Number to calculate to ", "Time"},
+            [
+              {"Recursive", Enum.map(range, fn x ->
+                begin = System.monotonic_time(:nanosecond)
+                fib_recursive(x)
+                fin = System.monotonic_time(:nanosecond)
+                {x, begin - fin}
+              end)},
+              {"Array", Enum.map(range, fn x ->
+                begin = System.monotonic_time(:nanosecond)
+                fib_array(x)
+                fin = System.monotonic_time(:nanosecond)
+                {x, begin - fin}
+              end)},
+              {"Store Last 2", Enum.map(range, fn x ->
+                begin = System.monotonic_time(:nanosecond)
+                fib_store(x)
+                fin = System.monotonic_time(:nanosecond)
+                {x, begin - fin}
+              end)},
+              {"Matrix", Enum.map(range, fn x ->
+                begin = System.monotonic_time(:nanosecond)
+                fib_matrix(x)
+                fin = System.monotonic_time(:nanosecond)
+                {x, begin - fin}
+              end)}
+            ]
+          )
         else
           exit("No number to plot")
         end
