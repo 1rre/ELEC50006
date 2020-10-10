@@ -27,30 +27,11 @@ defmodule Week1 do
           Plot.draw(
             {"Time for each method", "Number to calculate to ", "Time"},
             [
-              {"Recursive", Enum.map(range, fn x ->
-                begin = System.monotonic_time(:nanosecond)
-                fib_recursive(x)
-                fin = System.monotonic_time(:nanosecond)
-                {x, begin - fin}
-              end)},
-              {"Array", Enum.map(range, fn x ->
-                begin = System.monotonic_time(:nanosecond)
-                fib_array(x)
-                fin = System.monotonic_time(:nanosecond)
-                {x, begin - fin}
-              end)},
-              {"Store Last 2", Enum.map(range, fn x ->
-                begin = System.monotonic_time(:nanosecond)
-                fib_store(x)
-                fin = System.monotonic_time(:nanosecond)
-                {x, begin - fin}
-              end)},
-              {"Matrix", Enum.map(range, fn x ->
-                begin = System.monotonic_time(:nanosecond)
-                fib_matrix(x)
-                fin = System.monotonic_time(:nanosecond)
-                {x, begin - fin}
-              end)}
+              #{"Recursive", Enum.map(range, &{&1, time(&1, fn y -> fib_recursive(y) end)})},
+              {"Array", Enum.map(range, &{&1, ELEC50006.time(&1, fn y -> fib_array(y) end)})},
+              {"Store", Enum.map(range, &{&1, ELEC50006.time(&1, fn y -> fib_store(y) end)})},
+              {"Formula", Enum.map(range, &{&1, ELEC50006.time(&1, fn y -> fib_formula(y) end)})},
+              {"Matrix", Enum.map(range, &{&1, ELEC50006.time(&1, fn y -> fib_matrix(y) end)})}
             ]
           )
         else
@@ -61,12 +42,6 @@ defmodule Week1 do
     end
   end
 
-  def time(a, ty) do
-    begin = System.monotonic_time(:nanosecond)
-    _ = ty.(a)
-    fin = System.monotonic_time(:nanosecond)
-    fin - begin
-  end
 
   def fib_recursive(n) do
     if n < 3 do
