@@ -1,0 +1,6 @@
+2020.10.15 11:15:41 INFO  started: Metals version 0.9.4 in workspace 'C:\Users\tjmoo\Documents\EIE2\discrete-mathematics\Elixir' for client vscode.
+2020.10.15 11:15:43 INFO  time: initialize in 2.42s
+2020.10.15 11:15:45 WARN  no build tool detected in workspace 'C:\Users\tjmoo\Documents\EIE2\discrete-mathematics\Elixir'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+Oct 15, 2020 11:16:41 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
+2020.10.15 11:17:41 INFO  shutting down Metals
