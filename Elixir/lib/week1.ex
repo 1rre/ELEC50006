@@ -23,7 +23,7 @@ defmodule Week1 do
         end)
       "--compare" ->
         if Enum.count(args) > 1 do
-          range = (0..(Integer.parse(Enum.at(args, 1)) |> elem(0)))
+          range = (2..(Integer.parse(Enum.at(args, 1)) |> elem(0)))
           Plot.draw(
             {"Time for each method", "Number to calculate to ", "Time"},
             [
